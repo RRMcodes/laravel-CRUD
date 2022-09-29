@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use DB;
 
@@ -77,9 +78,12 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $blog = Blog::find($request->id);
+        $data = $request->except(['_token']);
+        $blog->update($data);
+        return redirect()->route('blogs.index');
     }
 
     /**

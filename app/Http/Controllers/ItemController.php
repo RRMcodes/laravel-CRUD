@@ -94,7 +94,6 @@ class ItemController extends Controller
      */
     public function update(Request $request)
     {
-//        dd($request->post());
         $item = Item::find($request->id);
         $data = $request->except(['_token']);
         $item->update($data);
