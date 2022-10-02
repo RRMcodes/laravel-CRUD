@@ -1,9 +1,21 @@
 @extends('layouts.app')
 @section('content')
     <main>
+
+        <div style="position: fixed; bottom: 0; right: 0;" x-data="{ showMessage: true }" x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)">
+
+            @if(session()->has('message'))
+                <div id="alert" class="alert alert-success">
+                    {{session()->get('message')}}
+                    <button style="float: right; margin-left: 50px" type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
+        </div>
+
         <a href="{{route('items.create')}}" class="btn btn-primary" action="">Create</a>
-        @empty($item)
-            <h4 style="display: inline" >Sorry, No items to show</h4>
+        @if (count($items)===0)
+            <h4 style="text-align: center;margin: 10%" >Sorry, No items to show</h4>
         @else
             <table class="table table-stripped">
                 <thead>
@@ -29,7 +41,7 @@
                 </tbody>
              </table>
             {{ $items->links() }}
-        @endempty
+        @endif
     </main>
 
 @endsection

@@ -57,7 +57,7 @@ class ItemController extends Controller
 //            'manufactured_date'      => $item['manufactured_date'],
 //        ]);
         Item::create($item);
-        return redirect()->route('items.index');
+        return redirect()->route('items.index')->with('message','Item created successfully');
 
     }
 
@@ -97,7 +97,7 @@ class ItemController extends Controller
         $item = Item::find($request->id);
         $data = $request->except(['_token']);
         $item->update($data);
-        return redirect()->route('items.index');
+        return redirect()->route('items.index')->with('message','Item edited successfully');
     }
 
     /**
@@ -111,7 +111,7 @@ class ItemController extends Controller
         $id = $request->route('id');
         $item = Item::findOrFail($id);
         $item->delete();
-        return redirect()->route('items.index');
+        return redirect()->route('items.index')->with('message','Item deleted successfully');
 
     }
 }

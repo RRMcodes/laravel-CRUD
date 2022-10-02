@@ -45,7 +45,7 @@ class BlogController extends Controller
         ]);
         $blog = $request->except(['_token']);
         Blog::create($blog);
-        return redirect()->route('blogs.index');
+        return redirect()->route('blogs.index')->with('message','Blog created successfully');
     }
 
     /**
@@ -83,7 +83,7 @@ class BlogController extends Controller
         $blog = Blog::find($request->id);
         $data = $request->except(['_token']);
         $blog->update($data);
-        return redirect()->route('blogs.index');
+        return redirect()->route('blogs.index')->with('message','Blog edited successfully');
     }
 
     /**
@@ -96,6 +96,6 @@ class BlogController extends Controller
     {
         $blog = Blog::findOrFail($id);
         $blog->delete();
-        return redirect()->route('blogs.index');
+        return redirect()->route('blogs.index')->with('message','Blog deleted successfully');
     }
 }
